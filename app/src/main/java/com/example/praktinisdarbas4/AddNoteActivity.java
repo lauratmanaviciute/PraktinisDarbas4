@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +30,11 @@ public class AddNoteActivity extends AppCompatActivity {
     public void onAddNoteClick(View view) {
         String noteName = txtNoteName.getText().toString();
         String noteContent = txtNoteContent.getText().toString();
+
+        if (txtNoteName.getText().toString().isEmpty() || txtNoteContent.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Note name or content is empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor spEd = sp.edit();
